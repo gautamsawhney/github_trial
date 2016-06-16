@@ -11,11 +11,11 @@ FactoryGirl.define do
   end
 
   #roles
-factory :admin, class: User do
-                    email
-                    username
-                    password '12345678'
-                    password_confirmation '12345678'
-                    roles :admin
-                  end
+  factory :admin, class: User do
+    email
+    username
+    password '12345678'
+    password_confirmation '12345678'
+    roles :admin
+  end
 end
