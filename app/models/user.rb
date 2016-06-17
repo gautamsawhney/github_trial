@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  enum roles: [:admin, :su]
   enum roles: [:admin]
 
   # Include default devise modules. Others available are:
