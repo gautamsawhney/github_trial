@@ -24,8 +24,7 @@ context "json API" do
       end
     end
 
-    
-    context 'with invalid attributes' do
+        context 'with invalid attributes' do
       it 'does not create the comment' do
         @comment = post "/api/v1/posts/#{@post.id}/comments?auth_token=#{user.authtokens.first.token}", comment: FactoryGirl.build(:comment).attributes.symbolize_keys, format: :json
         comment = FactoryGirl.build(:comment).attributes.symbolize_keys
@@ -67,7 +66,7 @@ context "json API" do
       json_response2 = json_response.clone
       expect(json_response1.collect { |j1| j1['id'] } + json_response2.collect { |j2| j2['id'] }) .to eq(Comment.all.collect(&:id))
     end
-        it "responds with 200" do
+    it "responds with 200" do
       get "/api/v1/posts/#{@post.id}/comments?auth_token=#{user.authtokens.first.token}", format: :json
       expect(response).to have_http_status(200)
     end
@@ -88,7 +87,7 @@ context "json API" do
       get "/api/v1/posts/#{@post.id}/comments/#{@post.comments.last.id}?auth_token=#{user.authtokens.first.token}", format: :json
       expect(json_response['id']).to eql(@post.comments.last.id)
     end
-        it "responds with 200" do
+    it "responds with 200" do
       get "/api/v1/posts/#{@post.id}/comments/#{@post.comments.last.id}?auth_token=#{user.authtokens.first.token}", format: :json
       expect(response).to have_http_status(200)
     end

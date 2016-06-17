@@ -4,13 +4,13 @@ class User < ActiveRecord::Base
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-    devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable 
 
   # Autocode: Relationships
   has_many :comments
   has_many :posts
-    has_many :authtokens, dependent: :destroy
+  has_many :authtokens, dependent: :destroy
   has_many :identities, dependent: :destroy
 
   # Autocode: Validations
@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   validates_presence_of     :password_confirmation, if: :password_required?
   validates_confirmation_of :password_confirmation, if: :password_required?
 
-    # Autocode: Callback
+  # Autocode: Callback
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup.except(:password)
     if login = conditions.delete(:login)
@@ -36,8 +36,7 @@ class User < ActiveRecord::Base
       where(conditions.to_h).first
     end
   end
-  
-  # File Upload
+    # File Upload
 
   # Soft Destroy
 

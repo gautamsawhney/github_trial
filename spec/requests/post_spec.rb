@@ -23,7 +23,7 @@ context "json API" do
     end
 
     context 'with invalid attributes' do
-            it 'does not create the post' do
+      it 'does not create the post' do
         post = FactoryGirl.build(:post).attributes.symbolize_keys
         post[:title] = ""
         expect { post "/api/v1/posts?auth_token=#{user.authtokens.first.token}", post: post, format: :json }.to_not change(Post, :count)
@@ -61,7 +61,7 @@ context "json API" do
       json_response2 = json_response.clone
       expect(json_response1.collect { |j1| j1['id'] } + json_response2.collect { |j2| j2['id'] }) .to eq(Post.all.collect(&:id))
     end
-        it "responds with 200" do
+    it "responds with 200" do
       get "/api/v1/posts?auth_token=#{user.authtokens.first.token}", format: :json
       expect(response).to have_http_status(200)
     end
@@ -81,7 +81,7 @@ context "json API" do
       get "/api/v1/posts/#{@post.id}?auth_token=#{user.authtokens.first.token}", format: :json
       expect(json_response['id']).to eql(@post.id)
     end
-        it "responds with 200" do
+    it "responds with 200" do
       get "/api/v1/posts/#{@post.id}?auth_token=#{user.authtokens.first.token}", format: :json
       expect(response).to have_http_status(200)
     end
